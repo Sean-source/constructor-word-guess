@@ -23,4 +23,7 @@ function Word(word) {
             letter.check(userGuess);
         })
     }
+
 }
+
+module.exports = Word;
