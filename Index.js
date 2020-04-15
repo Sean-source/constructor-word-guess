@@ -1,11 +1,11 @@
 let inquirer = require("inquirer");
-let Word = require("word.js");
+let Word = require("./Word.js");
 let randomwordArray = ["array", "linked list", "stack", "queue", "deque"];
 let userGuesses = [];
 let guessesRemaining = 10;
 let initializeWord;
 let word;
-
+initialize();
 function initialize() {
     initializeWord = generaterandomWord();
     word = new Word(initializeWord);
@@ -26,34 +26,35 @@ function prompts() {
             message: "Hello there, please choose a lowercase letter.",
             name: "user",
             validate: function (input) {
-                if ([a - z].test(input) && input.length == 1) {
+                if (/[a-z]/.test(input) && input.length == 1) {
                     return true;
                 }
                 else {
                     return false;
                 }
             }
+        }
     ]).then(function (input) {
 
-                if (guessRemaining > 0 && !userGuesses.includes(input.user)) {
-                    word.checkLetter(input.user);
-                    console.log(word.printWord(input.user));
-                    prompts();
-                }
-                if (guessRemaining == 0) {
-                    console.log("You lose. Would you like to play again?");
-                    return;
-                }
-                if (userGuesses.includes(input.user)) {
-                    console.log("That letter has already been guessed. Guess another letter.")
-                    prompts();
-                }
-                guessesRemaining--;
+        if (guessesRemaining > 0 && !userGuesses.includes(input.user)) {
+            word.checkLetter(input.user);
+            console.log(word.printWord(input.user));
+            prompts();
+        }
+        if (guessesRemaining == 0) {
+            console.log("You lose. Would you like to play again?");
+            return;
+        }
+        if (userGuesses.includes(input.user)) {
+            console.log("That letter has already been guessed. Guess another letter.")
+            prompts();
+        }
+        guessesRemaining--;
 
 
 
 
-            })
+    })
 
 
 }
