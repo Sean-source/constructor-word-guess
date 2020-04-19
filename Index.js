@@ -6,12 +6,15 @@ let guessesRemaining = 10;
 let initializeWord;
 let word;
 initialize();
+
+//Initialize a random word and then prompts the user
 function initialize() {
     initializeWord = generaterandomWord();
     word = new Word(initializeWord);
     prompts();
 }
 
+//Generates a random word using Math.random
 function generaterandomWord() {
     let randomIndex = Math.floor(Math.random() * randomwordArray.length);
     let randomWord = randomwordArray[randomIndex];
@@ -19,6 +22,7 @@ function generaterandomWord() {
 
 }
 
+//Using inquirer.prompt asking the user to choose a letter.
 function prompts() {
     inquirer.prompt([
         {
@@ -34,7 +38,7 @@ function prompts() {
                 }
             }
         }
-    ]).then(function (input) {
+    ]).then(function (input) {//Javascript promise used to check input.
 
         if (guessesRemaining > 0 && !userGuesses.includes(input.user)) {
             word.checkLetter(input.user);
