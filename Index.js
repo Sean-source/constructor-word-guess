@@ -2,13 +2,14 @@ let inquirer = require("inquirer");
 let Word = require("./Word.js");
 let randomwordArray = ["array", "linkedlist", "stack", "queue", "deque"];
 let userGuesses = [];
-let guessesRemaining = 10;
+let guessesRemaining;
 let initializeWord;
 let initialWord;
 initialize();
 
 //Initialize a random word and then prompts the user
 function initialize() {
+    guessesRemaining = 4;
     initializeWord = generaterandomWord();
     initialWord = new Word(initializeWord);
     initialWord.initializeLetterArray();
@@ -47,8 +48,8 @@ function prompts() {
             prompts();
         }
         if (guessesRemaining <= 0) {
-            console.log("You lose. Would you like to play again?");
-            return;
+            console.log("You lose.");
+            newGame();
         }
 
         if (userGuesses.includes(input.user)) {
@@ -57,7 +58,7 @@ function prompts() {
             prompts();
         }
 
-        if () {
+        if (initialWord.word.includes(input.user) && guessesRemaining > 0) {
 
             userGuesses.push(input.user);
             initialWord.checkLetter(input.user);
