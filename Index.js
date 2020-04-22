@@ -29,7 +29,7 @@ function prompts() {
     inquirer.prompt([
         {
             type: "input",
-            message: "Hello there, please choose a lowercase letter.",
+            message: "Please choose a lowercase letter.",
             name: "user",
             validate: function (input) {
                 if (/[a-z]/.test(input) && input.length == 1) {
@@ -41,35 +41,36 @@ function prompts() {
             }
         }
     ]).then(function (input) {//Javascript promise used to check input.
+        if (guessesRemaining <= 0) {
+            console.log("You lose.");
+            return newGame();
+        }
         if (!initialWord.word.includes(input.user)) {
             guessesRemaining--;
             console.log("That is incorrect. Guesses Remaining: " + guessesRemaining);
             console.log(initialWord.printWord(input.user));
-            prompts();
+            return prompts();
         }
-        if (guessesRemaining <= 0) {
-            console.log("You lose.");
-            newGame();
-        }
+
 
         if (userGuesses.includes(input.user)) {
             console.log("That letter has already been guessed. Guess another letter.")
             console.log(initialWord.printWord(input.user));
-            prompts();
+            return prompts();
         }
 
-        if (initialWord.word.includes(input.user) && guessesRemaining > 0) {
+        if (initialWord.word.includes(input.user) && guessesRemaining > 0 && !userGuesses.includes(input.user)) {
 
             userGuesses.push(input.user);
             initialWord.checkLetter(input.user);
             console.log(initialWord.printWord(input.user));
-            prompts();
+            return prompts();
 
         }
 
         if (initialWord.checkWord()) {
             console.log("Congrats! You won the game.");
-            newGame();
+            return newGame();
         }
 
     })
@@ -83,7 +84,7 @@ function newGame() {
         name: "user"
     }]).then(function (input) {
         if (input.user == true) {
-            initialize();
+            return initialize();
         }
         else {
             return;
