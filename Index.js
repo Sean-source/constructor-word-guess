@@ -9,7 +9,7 @@ initialize();
 
 //Initialize a random word and then prompts the user
 function initialize() {
-    guessesRemaining = 4;
+    guessesRemaining = 6;
     initializeWord = generaterandomWord();
     initialWord = new Word(initializeWord);
     initialWord.initializeLetterArray();
