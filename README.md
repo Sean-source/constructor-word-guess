@@ -2,7 +2,7 @@
 
 This is a word Guess command-line game using constructor functions.
 
-[!alt text](Working image.PNG)
+[!alt text](https://raw.githubusercontent.com/Sean-source/constructor-word-guess/master/Working%20image.PNG)
 
 
 
