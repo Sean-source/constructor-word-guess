@@ -41,6 +41,11 @@ function prompts() {
             }
         }
     ]).then(function (input) {//Javascript promise used to check input.
+        if (initialWord.checkWord()) {
+            console.log("Congrats! You won the game.");
+            return newGame();
+        }
+
         if (guessesRemaining <= 0) {
             console.log("You lose.");
             return newGame();
@@ -59,7 +64,7 @@ function prompts() {
             return prompts();
         }
 
-        if (initialWord.word.includes(input.user) && guessesRemaining > 0 && !userGuesses.includes(input.user)) {
+        if (initialWord.word.includes(input.user) && guessesRemaining > 0 && !userGuesses.includes(input.user) && !initialWord.checkWord()) {
 
             userGuesses.push(input.user);
             initialWord.checkLetter(input.user);
@@ -68,10 +73,7 @@ function prompts() {
 
         }
 
-        if (initialWord.checkWord()) {
-            console.log("Congrats! You won the game.");
-            return newGame();
-        }
+
 
     })
 
