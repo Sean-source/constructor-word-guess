@@ -1,2 +1,4 @@
 # constructor-word-guess
-![alt](Workingimage.png)
+This is a constructor word guess game using Node.
+![alt](demo1.png)
+![alt](demo2.png)
