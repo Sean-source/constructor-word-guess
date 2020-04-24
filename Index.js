@@ -26,6 +26,10 @@ function generaterandomWord() {
 
 //Using inquirer.prompt asking the user to choose a letter.
 function prompts() {
+    if (initialWord.checkWord()) {
+        console.log("Congrats! You won the game.");
+        return newGame();
+    }
     inquirer.prompt([
         {
             type: "input",
@@ -41,10 +45,7 @@ function prompts() {
             }
         }
     ]).then(function (input) {//Javascript promise used to check input.
-        if (initialWord.checkWord()) {
-            console.log("Congrats! You won the game.");
-            return newGame();
-        }
+
 
         if (guessesRemaining <= 0) {
             console.log("You lose.");
